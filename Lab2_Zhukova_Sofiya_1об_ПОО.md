@@ -331,6 +331,6 @@ z = 1 + 1i
 <img width="962" height="940" alt="9459ec5bfe8c8ec1834b1b2d690eb090" src="https://github.com/user-attachments/assets/c12db72b-1da6-473a-a569-e67c6f92d2cf" />
 
 z = 1 + 2i
-<img width="962" height="940" alt="9459ec5bfe8c8ec1834b1b2d690eb090" src="https://github.com/user-attachments/assets/457e6ba7-4d6a-467c-b42d-d897c6dcb1c2" /
+<img width="962" height="940" alt="9459ec5bfe8c8ec1834b1b2d690eb090" src="https://github.com/user-attachments/assets/457e6ba7-4d6a-467c-b42d-d897c6dcb1c2" />
 
 ### Выполнила: Жукова София 1об ПОО
