@@ -200,22 +200,180 @@ fn main() {
 
 #### Код программы:
 ```Rust
+use std::io;
 
+
+fn main() {
+    let mut input = String::new();
+    println!("Введите день недели(1-7):");
+
+    io::stdin()
+            .read_line(&mut input)
+            .expect("Ошибка ввода!");
+
+    let today = match input.trim().parse::<u32>() {
+        Ok(1) => DayOfWeek::Monday,
+        Ok(2) => DayOfWeek::Tuesday,
+        Ok(3) => DayOfWeek::Wednesday,
+        Ok(4) => DayOfWeek::Thursday,
+        Ok(5) => DayOfWeek::Friday, 
+        Ok(6) => DayOfWeek::Saturday,
+        Ok(7) => DayOfWeek::Sunday,
+        _ => {println!("Ошибка, введите число от 1 до 7!");
+              return;}
+    };
+
+    let next = next_day(today);
+
+    print(next);
+
+}
+    
+enum DayOfWeek {
+    Monday = 1,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+
+fn next_day(curr_day: DayOfWeek) -> DayOfWeek {
+    match curr_day {
+        DayOfWeek::Monday => DayOfWeek::Tuesday,
+        DayOfWeek::Tuesday => DayOfWeek::Wednesday,
+        DayOfWeek::Wednesday => DayOfWeek::Thursday,
+        DayOfWeek::Thursday => DayOfWeek::Friday,
+        DayOfWeek::Friday => DayOfWeek::Saturday,
+        DayOfWeek::Saturday => DayOfWeek::Sunday,
+        DayOfWeek::Sunday => DayOfWeek::Monday
+
+    }
+
+}
+
+fn print(day: DayOfWeek) {
+    match day {
+        DayOfWeek::Monday => println!(" Завтра -> Понедельник"),
+        DayOfWeek::Tuesday => println!(" Завтра -> Вторник"),
+        DayOfWeek::Wednesday => println!(" Завтра -> Среда"),
+        DayOfWeek::Thursday => println!(" Завтра -> Четверг"),
+        DayOfWeek::Friday => println!(" Завтра -> Пятница"),
+        DayOfWeek::Saturday => println!(" Завтра -> Суббота"),
+        DayOfWeek::Sunday => println!(" Завтра -> Воскресенье")
+    }
+}
 ```
 #### Результат работы программы:
+<img width="542" height="392" alt="image" src="https://github.com/user-attachments/assets/6a42aba1-42f4-414c-9685-60149f7d1f65" />
 
-### Задача
+### Задача 7
 #### Постановка задачи:
-
+Создайте структуру Product с полями name, price и category, а также перечисление (enum) Category для категорий товаров. Напишите метод для вывода информации о продукте и ассоциированную функцию для подсчета общей суммы товаров в заданной категории из массива продуктов.
 #### Список идентификаторов:
 
 #### Код программы:
 ```Rust
+use std::io;
 
+fn main() {
+    let products = [
+        Product {
+            name: String::from("Телефон"),
+            price: 2500,
+            category: Category::Electronics,
+        },
+        Product {
+            name: String::from("Футболка"),
+            price: 1500,
+            category: Category::Clothing,
+        },
+        Product {
+            name: String::from("Хлеб"),
+            price: 50,
+            category: Category::Food,
+        },
+        Product {
+            name: String::from("Ноутбук"),
+            price: 50000,
+            category: Category::Electronics,
+        },
+        Product {
+            name: String::from("Джинсы"),
+            price: 3000,
+            category: Category::Clothing,
+        },
+    ];
+    
+    // Выводим информацию о всех товарах
+    println!("Информация о всех товарах:");
+    for product in &products {
+        print_product_info(product);
+    }
+    
+    // Подсчитываем общую сумму для разных категорий
+    let electronics_total = total_price_in_category(&products, Category::Electronics);
+    let clothing_total = total_price_in_category(&products, Category::Clothing);
+    let food_total = total_price_in_category(&products, Category::Food);
+    
+    println!("Общая стоимость товаров по категориям:");
+    println!("Электроника: {:.2} руб.", electronics_total);
+    println!("Одежда: {:.2} руб.", clothing_total);
+    println!("Еда: {:.2} руб.", food_total);
+
+}
+    
+struct Product {
+    name: String,
+    price: u64,
+    category: Category
+}
+enum Category {
+    Electronics,
+    Clothing,
+    Food,
+    Books,
+    Other,
+}
+
+fn print_product_info(product: &Product) {
+    let category_name = match product.category {
+        Category::Electronics => "Электроника",
+        Category::Clothing => "Одежда",
+        Category::Food => "Еда",
+        Category::Books => "Книги",
+        Category::Other => "Другое",
+    };
+    
+    println!("Товар: {}", product.name);
+    println!("Цена: {} руб.", product.price);
+    println!("Категория: {}", category_name);
+    println!("---");
+}
+
+fn total_price_in_category(products: &[Product], category: Category) -> u64 {
+    let mut total = 0;
+    
+    for product in products {
+        // Сравниваем категории через match
+        match (&product.category, &category) {
+            (Category::Electronics, Category::Electronics) => total += product.price,
+            (Category::Clothing, Category::Clothing) => total += product.price,
+            (Category::Food, Category::Food) => total += product.price,
+            (Category::Books, Category::Books) => total += product.price,
+            (Category::Other, Category::Other) => total += product.price,
+            _ => {} // Если категории не совпадают, ничего не делаем
+        }
+    }
+    
+    total
+}
 ```
 #### Результат работы программы:
+<img width="620" height="914" alt="image" src="https://github.com/user-attachments/assets/36101ebf-15d5-4688-aef1-6474f6b262f0" />
 
-### Задача
+### Задача 8
 #### Постановка задачи:
 
 #### Список идентификаторов:
