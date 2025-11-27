@@ -375,25 +375,128 @@ fn total_price_in_category(products: &[Product], category: Category) -> u64 {
 
 ### Задача 8
 #### Постановка задачи:
-
+Создайте структуру Employee с полями name, position, salary, а также перечисление Position для должностей сотрудников. Напишите функцию, которая принимает вектор  сотрудников и возвращает вектор сотрудников заданной должности.
 #### Список идентификаторов:
 
 #### Код программы:
 ```Rust
+use std::io;
 
+fn main() {
+
+    let employees: Vec<Employee> = vec![
+        Employee {
+            name: String::from("Василий Петров"),
+            position: Position::Manager,
+            salary: 80000,
+        },
+        Employee {
+            name: String::from("Петр Сидоров"),
+            position: Position::Developer,
+            salary: 70000,
+        },
+        Employee {
+            name: String::from("Мария Гербова"),
+            position: Position::Designer,
+            salary: 60000,
+        },
+        Employee {
+            name: String::from("Иван Козлов"),
+            position: Position::Developer,
+            salary: 75000,
+        },
+        Employee {
+            name: String::from("Ольга Смирнова"),
+            position: Position::Analyst,
+            salary: 65000,
+        },
+        Employee {
+            name: String::from("Алексей Волков"),
+            position: Position::Manager,
+            salary: 25000,
+        },
+    ];
+
+    println!("Введите должность (Менеджер, Разработчик, Дизайнер, Аналитик):");
+    let mut input: String = String::new();
+    io::stdin().read_line(&mut input)
+               .expect("Ошибка ввода!");
+    
+    let x = match string_to_position(input.trim()) {
+        Some(pos) => pos,
+        None => {
+            println!("Ошибка: неизвестная должность '{}'", input);
+            println!("Доступные должности: Менеджер, Разработчик, Дизайнер, Аналитик");
+            return;
+        }
+    };
+
+    let res = sort_by_position(employees, x);
+    
+    // Выводим информацию о введённой должности:
+    println!("Сотрудники с должностью: {}", input);
+    for employee in res {
+        print_employee_info(&employee);
+    }
+}
+    
+struct Employee {
+    name: String,
+    position: Position,
+    salary: u32,
+}
+
+enum Position {
+    Manager,
+    Developer,
+    Designer,
+    Analyst,
+}
+
+fn string_to_position(input: &str) -> Option<Position> {
+    match input.to_lowercase().as_str() {
+        "менеджер" => Some(Position::Manager),
+        "разработчик" => Some(Position::Developer),
+        "Дизайнер" => Some(Position::Designer),
+        "Аналитик" => Some(Position::Analyst),
+        _ => None, // Если ввод не распознан
+    }
+}
+
+fn sort_by_position(employees: Vec<Employee>, position: Position) -> Vec<Employee>{
+    let mut result: Vec<Employee> = Vec::new();
+    for employee in employees{
+        match (&employee.position, &position){
+            (Position::Manager, Position::Manager) => result.push(employee),
+            (Position::Developer, Position::Developer) => result.push(employee),
+            (Position::Designer, Position::Designer) => result.push(employee),
+            (Position::Analyst, Position::Analyst) => result.push(employee),
+            _ => {}
+        }
+    }
+    result
+}
+
+
+fn print_employee_info(employee: &Employee) {
+    let position_name = match employee.position {
+        Position::Manager => "Менеджер",
+        Position::Developer => "Разработчик",
+        Position::Designer => "Дизайнер",
+        Position::Analyst => "Аналитик"
+    };
+    
+    println!("Сотрудник: {}", employee.name);
+    println!("Должность: {}", position_name);
+    println!("Зарплата: {} руб.", employee.salary);
+    println!("---");
+}
 ```
 #### Результат работы программы:
+<img width="980" height="424" alt="image" src="https://github.com/user-attachments/assets/ef4f1b83-b70f-47cb-b92a-6d0ccc973bc5" />
 
-### Задача
-#### Постановка задачи:
 
-#### Список идентификаторов:
-
-#### Код программы:
-```Rust
-
-```
-#### Результат работы программы:
+###Выполнила: Жукова София 1об ПОО
 
 
 
