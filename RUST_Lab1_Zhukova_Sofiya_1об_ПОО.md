@@ -279,6 +279,20 @@ fn print(day: DayOfWeek) {
 #### Постановка задачи:
 Создайте структуру Product с полями name, price и category, а также перечисление (enum) Category для категорий товаров. Напишите метод для вывода информации о продукте и ассоциированную функцию для подсчета общей суммы товаров в заданной категории из массива продуктов.
 #### Список идентификаторов:
+|Имя переменной|Тип данных|Описание и смысл|
+|---|---|------|
+|Product|struct|Структура, описывает определённый товар|
+|name|String|Поле структуры, наименование товара|
+|price|u64|Поле структуры, цена товара|
+|category|Category|Поле структуры, хранит значение наименования|
+|products|Product|Массив структур, список товаров с их информацией|
+|electronics_total|u64|Конечная сумма для электроники|
+|clothing_total|u64|Конечная сумма для одежды|
+|food_total|u64|Конечная сумма для еды|
+|Category|enum|Перечисление категорий товаров|
+|product|Product|Параметр функции дл вывода инф-ии о товаре|
+|category_name|&str|Переменная для определения текста категории|
+|total|u64|Конечная сумма в подсчёте функции|
 
 #### Код программы:
 ```Rust
@@ -340,8 +354,6 @@ enum Category {
     Electronics,
     Clothing,
     Food,
-    Books,
-    Other,
 }
 
 fn print_product_info(product: &Product) {
@@ -349,8 +361,6 @@ fn print_product_info(product: &Product) {
         Category::Electronics => "Электроника",
         Category::Clothing => "Одежда",
         Category::Food => "Еда",
-        Category::Books => "Книги",
-        Category::Other => "Другое",
     };
     
     println!("Товар: {}", product.name);
@@ -368,8 +378,6 @@ fn total_price_in_category(products: &[Product], category: Category) -> u64 {
             (Category::Electronics, Category::Electronics) => total += product.price,
             (Category::Clothing, Category::Clothing) => total += product.price,
             (Category::Food, Category::Food) => total += product.price,
-            (Category::Books, Category::Books) => total += product.price,
-            (Category::Other, Category::Other) => total += product.price,
             _ => {} // Если категории не совпадают, ничего не делаем
         }
     }
