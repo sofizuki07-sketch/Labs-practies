@@ -66,6 +66,7 @@ fn main() {
 }
 ```
 #### Результаты выполнения:
+<img width="644" height="256" alt="image" src="https://github.com/user-attachments/assets/e57288be-bcee-4bdb-9622-fa907cb04b67" />
 
 ### Задача 2
 #### Постановка задачи:
@@ -104,6 +105,7 @@ fn main() {
 }
 ```
 #### Результаты выполнения:
+<img width="426" height="70" alt="image" src="https://github.com/user-attachments/assets/da898f9b-b5c8-4cdc-b025-7b0a1a8abf81" />
 
 ### Задача 3
 #### Постановка задачи:
@@ -171,9 +173,9 @@ impl TodoList {
 fn main() {
     let mut todo_list = TodoList::new();
 
-    todo_list.add_task(String::from("Изучить тему Ownership"));
+    todo_list.add_task(String::from("Купить молоко и сыр"));
     todo_list.add_task(String::from("Написать лабораторную работу"));
-    todo_list.add_task(String::from("Сделать коммит в Git"));
+    todo_list.add_task(String::from("Убраться в комнате"));
 
     todo_list.print_all();
 
@@ -187,6 +189,7 @@ fn main() {
 }
 ```
 #### Результаты выполнения:
+<img width="642" height="600" alt="image" src="https://github.com/user-attachments/assets/5389d9e4-7a3f-4a9a-8c1c-ac4e1ce7fc4f" />
 
 ### Задача 4
 #### Постановка задачи:
@@ -241,6 +244,7 @@ fn main() {
 }
 ```
 #### Результаты выполнения:
+<img width="552" height="92" alt="image" src="https://github.com/user-attachments/assets/5b539ca0-7625-46a7-82bf-058288d81410" />
 
 ### Задача 5
 #### Постановка задачи:
@@ -296,6 +300,7 @@ fn main() {
 }
 ```
 #### Результаты выполнения:
+<img width="376" height="56" alt="image" src="https://github.com/user-attachments/assets/3389bdbe-7f0a-455e-aa71-3f694d905011" />
 
 ### Задача 6
 #### Постановка задачи:
@@ -360,6 +365,7 @@ fn main() {
 }
 ```
 #### Результаты выполнения:
+<img width="716" height="182" alt="image" src="https://github.com/user-attachments/assets/03ebb642-2490-4b3e-8b9c-d80af4df4644" />
 
 ### Задача 7
 #### Постановка задачи:
@@ -375,8 +381,6 @@ fn main() {
 
 #### Код программы:
 ```Rust
-use std::ops::Add;
-
 trait Summable {
     fn sum(&self) -> u32;
 }
@@ -386,25 +390,31 @@ struct Pair<T> {
     second: T,
 }
 
-impl<T> Summable for Pair<T>
-where
-    T: Add<Output = T> + Copy + Into<u32>,
-{
+// Реализация для целых чисел
+impl Summable for Pair<i32> {
     fn sum(&self) -> u32 {
-        (self.first + self.second).into()
+        (self.first + self.second) as u32
+    }
+}
+
+// Реализация для чисел с плавающей точкой
+impl Summable for Pair<f32> {
+    fn sum(&self) -> u32 {
+        (self.first + self.second) as u32
     }
 }
 
 fn main() {
     let int_pair = Pair { first: 15, second: 25 };
-    let sum_int: u32 = int_pair.sum();
+    let sum_int = int_pair.sum();
     println!("Сумма целых чисел: {}", sum_int);
 
     let float_pair = Pair { first: 10.5, second: 20.3 };
-    let sum_float: u32 = float_pair.sum();
+    let sum_float = float_pair.sum();
     println!("Сумма чисел с плавающей точкой (приведенная к u32): {}", sum_float);
 }
 ```
 #### Результаты выполнения:
+<img width="884" height="96" alt="image" src="https://github.com/user-attachments/assets/fbf9afc8-8baf-4a1f-9acd-cdc65b389fcd" />
 
 ## Выполнила: Жукова София Романовна 1об ПОО
