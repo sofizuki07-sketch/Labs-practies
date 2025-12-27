@@ -1,0 +1,36 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Дом в котором",
+      "author": "Мариам Петросян",
+      "year": "1998",
+      "is_available": false
+    },
+    {
+      "id": 2,
+      "title": "Мы",
+      "author": "Е Замятин",
+      "year": "2015",
+      "is_available": false
+    }
+  ],
+  "readers": {
+    "1": {
+      "id": 1,
+      "name": "София",
+      "borrowed_books": [
+        1
+      ]
+    },
+    "2": {
+      "id": 2,
+      "name": "Ирина",
+      "borrowed_books": [
+        2
+      ]
+    }
+  },
+  "next_book_id": 3,
+  "next_reader_id": 3
+}
